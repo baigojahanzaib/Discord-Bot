@@ -1,6 +1,3 @@
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
@@ -8,37 +5,32 @@ import Dashboard from "./pages/Dashboard";
 import DashboardLayout from "./components/DashboardLayout";
 import CommandList from "./components/CommandList";
 import Announcements from "./pages/Announcements";
+import AutoMod from "./pages/AutoMod";
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
+function App() {
+  return (
+    <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/commands" element={
-            <DashboardLayout>
-              <CommandList />
-            </DashboardLayout>
-          } />
+          <Route
+            path="/commands"
+            element={
+              <DashboardLayout>
+                <CommandList />
+              </DashboardLayout>
+            }
+          />
           <Route path="/announcements" element={<Announcements />} />
+          <Route path="/automod" element={<AutoMod />} />
           <Route
             path="/roles"
             element={
               <DashboardLayout>
                 <div className="text-white">Roles Management (Coming Soon)</div>
-              </DashboardLayout>
-            }
-          />
-          <Route
-            path="/tickets"
-            element={
-              <DashboardLayout>
-                <div className="text-white">Ticket System (Coming Soon)</div>
               </DashboardLayout>
             }
           />
@@ -51,10 +43,10 @@ const App = () => (
             }
           />
           <Route
-            path="/moderation"
+            path="/tickets"
             element={
               <DashboardLayout>
-                <div className="text-white">Moderation Tools (Coming Soon)</div>
+                <div className="text-white">Support Tickets (Coming Soon)</div>
               </DashboardLayout>
             }
           />
@@ -62,14 +54,14 @@ const App = () => (
             path="/settings"
             element={
               <DashboardLayout>
-                <div className="text-white">Bot Settings (Coming Soon)</div>
+                <div className="text-white">Settings (Coming Soon)</div>
               </DashboardLayout>
             }
           />
         </Routes>
       </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+    </QueryClientProvider>
+  );
+}
 
 export default App;
