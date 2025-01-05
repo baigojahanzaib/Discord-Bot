@@ -9,6 +9,91 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      announcements: {
+        Row: {
+          channel_id: string
+          content: string
+          created_at: string | null
+          created_by: string
+          id: string
+          image_url: string | null
+          scheduled_for: string | null
+          server_id: string | null
+          title: string
+        }
+        Insert: {
+          channel_id: string
+          content: string
+          created_at?: string | null
+          created_by: string
+          id?: string
+          image_url?: string | null
+          scheduled_for?: string | null
+          server_id?: string | null
+          title: string
+        }
+        Update: {
+          channel_id?: string
+          content?: string
+          created_at?: string | null
+          created_by?: string
+          id?: string
+          image_url?: string | null
+          scheduled_for?: string | null
+          server_id?: string | null
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "announcements_server_id_fkey"
+            columns: ["server_id"]
+            isOneToOne: false
+            referencedRelation: "discord_servers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      automod_settings: {
+        Row: {
+          banned_words: string[] | null
+          created_at: string | null
+          id: string
+          max_links: number | null
+          max_mentions: number | null
+          server_id: string | null
+          trusted_domains: string[] | null
+          updated_at: string | null
+        }
+        Insert: {
+          banned_words?: string[] | null
+          created_at?: string | null
+          id?: string
+          max_links?: number | null
+          max_mentions?: number | null
+          server_id?: string | null
+          trusted_domains?: string[] | null
+          updated_at?: string | null
+        }
+        Update: {
+          banned_words?: string[] | null
+          created_at?: string | null
+          id?: string
+          max_links?: number | null
+          max_mentions?: number | null
+          server_id?: string | null
+          trusted_domains?: string[] | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "automod_settings_server_id_fkey"
+            columns: ["server_id"]
+            isOneToOne: true
+            referencedRelation: "discord_servers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       bot_commands: {
         Row: {
           created_at: string | null
@@ -107,6 +192,208 @@ export type Database = {
           server_name?: string
         }
         Relationships: []
+      }
+      giveaways: {
+        Row: {
+          channel_id: string
+          created_at: string | null
+          created_by: string
+          description: string | null
+          ends_at: string
+          id: string
+          message_id: string | null
+          prize: string
+          server_id: string | null
+          status: string | null
+          winner_count: number | null
+        }
+        Insert: {
+          channel_id: string
+          created_at?: string | null
+          created_by: string
+          description?: string | null
+          ends_at: string
+          id?: string
+          message_id?: string | null
+          prize: string
+          server_id?: string | null
+          status?: string | null
+          winner_count?: number | null
+        }
+        Update: {
+          channel_id?: string
+          created_at?: string | null
+          created_by?: string
+          description?: string | null
+          ends_at?: string
+          id?: string
+          message_id?: string | null
+          prize?: string
+          server_id?: string | null
+          status?: string | null
+          winner_count?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "giveaways_server_id_fkey"
+            columns: ["server_id"]
+            isOneToOne: false
+            referencedRelation: "discord_servers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      server_logs: {
+        Row: {
+          created_at: string | null
+          event_data: Json
+          event_type: string
+          id: string
+          server_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          event_data: Json
+          event_type: string
+          id?: string
+          server_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          event_data?: Json
+          event_type?: string
+          id?: string
+          server_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "server_logs_server_id_fkey"
+            columns: ["server_id"]
+            isOneToOne: false
+            referencedRelation: "discord_servers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      server_roles: {
+        Row: {
+          created_at: string | null
+          description: string | null
+          id: string
+          is_self_assignable: boolean | null
+          role_id: string
+          role_name: string
+          server_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          is_self_assignable?: boolean | null
+          role_id: string
+          role_name: string
+          server_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          is_self_assignable?: boolean | null
+          role_id?: string
+          role_name?: string
+          server_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "server_roles_server_id_fkey"
+            columns: ["server_id"]
+            isOneToOne: false
+            referencedRelation: "discord_servers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      ticket_messages: {
+        Row: {
+          author_id: string
+          author_name: string
+          content: string
+          created_at: string | null
+          id: string
+          ticket_id: string | null
+        }
+        Insert: {
+          author_id: string
+          author_name: string
+          content: string
+          created_at?: string | null
+          id?: string
+          ticket_id?: string | null
+        }
+        Update: {
+          author_id?: string
+          author_name?: string
+          content?: string
+          created_at?: string | null
+          id?: string
+          ticket_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ticket_messages_ticket_id_fkey"
+            columns: ["ticket_id"]
+            isOneToOne: false
+            referencedRelation: "tickets"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      tickets: {
+        Row: {
+          channel_id: string
+          closed_at: string | null
+          closed_by: string | null
+          created_at: string | null
+          creator_id: string
+          creator_name: string
+          id: string
+          server_id: string | null
+          status: string | null
+          subject: string
+        }
+        Insert: {
+          channel_id: string
+          closed_at?: string | null
+          closed_by?: string | null
+          created_at?: string | null
+          creator_id: string
+          creator_name: string
+          id?: string
+          server_id?: string | null
+          status?: string | null
+          subject: string
+        }
+        Update: {
+          channel_id?: string
+          closed_at?: string | null
+          closed_by?: string | null
+          created_at?: string | null
+          creator_id?: string
+          creator_name?: string
+          id?: string
+          server_id?: string | null
+          status?: string | null
+          subject?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tickets_server_id_fkey"
+            columns: ["server_id"]
+            isOneToOne: false
+            referencedRelation: "discord_servers"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {
