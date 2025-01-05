@@ -1,21 +1,38 @@
-import * as React from "react";
-import { Slot } from "@radix-ui/react-slot";
-import { PanelLeft } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Separator } from "@/components/ui/separator";
-import { Sheet, SheetContent } from "@/components/ui/sheet";
-import { Skeleton } from "@/components/ui/skeleton";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { cn } from "@/lib/utils";
-import { useSidebar } from "./context";
-import { SidebarMenuButtonProps } from "./types";
-import { sidebarMenuButtonVariants } from "./variants";
+import * as React from "react"
+import { Slot } from "@radix-ui/react-slot"
+import { PanelLeft } from "lucide-react"
+import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Separator } from "@/components/ui/separator"
+import { Sheet, SheetContent } from "@/components/ui/sheet"
+import { Skeleton } from "@/components/ui/skeleton"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+import { useSidebar } from "./context"
+import { sidebarMenuButtonVariants } from "./variants"
+import type {
+  SidebarProps,
+  SidebarTriggerProps,
+  SidebarRailProps,
+  SidebarInsetProps,
+  SidebarInputProps,
+  SidebarHeaderProps,
+  SidebarFooterProps,
+  SidebarContentProps,
+  SidebarGroupProps,
+  SidebarGroupLabelProps,
+  SidebarGroupActionProps,
+  SidebarGroupContentProps,
+  SidebarMenuProps,
+  SidebarMenuItemProps,
+  SidebarMenuButtonProps,
+  SidebarMenuActionProps,
+  SidebarMenuBadgeProps,
+  SidebarMenuSkeletonProps,
+  SidebarMenuSubProps,
+  SidebarMenuSubItemProps,
+  SidebarMenuSubButtonProps,
+} from "./types"
 
 export const Sidebar = React.forwardRef<
   HTMLDivElement,
