@@ -1,6 +1,8 @@
 import * as React from "react"
-import type { SidebarContext } from "./types"
+import { TooltipProvider } from "@radix-ui/react-tooltip"
 import { useIsMobile } from "@/hooks/use-mobile"
+import { cn } from "@/lib/utils"
+import type { SidebarContext, SidebarProviderProps } from "./types"
 
 const SIDEBAR_COOKIE_NAME = "sidebar:state"
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7
@@ -89,3 +91,5 @@ export const SidebarProvider = React.forwardRef<HTMLDivElement, SidebarProviderP
   }
 )
 SidebarProvider.displayName = "SidebarProvider"
+
+export { SidebarContext }

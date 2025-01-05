@@ -1,4 +1,5 @@
 import * as React from "react"
+import { TooltipContent } from "@radix-ui/react-tooltip"
 
 export type SidebarContext = {
   state: "expanded" | "collapsed"
