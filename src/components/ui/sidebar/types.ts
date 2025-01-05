@@ -1,5 +1,7 @@
 import * as React from "react"
 import { TooltipContent } from "@radix-ui/react-tooltip"
+import { VariantProps } from "class-variance-authority"
+import { sidebarMenuButtonVariants } from "./variants"
 
 export type SidebarContext = {
   state: "expanded" | "collapsed"
@@ -36,15 +38,20 @@ export type SidebarGroupActionProps = React.ComponentProps<"button"> & { asChild
 export type SidebarGroupContentProps = React.ComponentProps<"div">
 export type SidebarMenuProps = React.ComponentProps<"ul">
 export type SidebarMenuItemProps = React.ComponentProps<"li">
+
 export type SidebarMenuButtonProps = React.ComponentProps<"button"> & {
   asChild?: boolean
   isActive?: boolean
   tooltip?: string | React.ComponentProps<typeof TooltipContent>
+  variant?: VariantProps<typeof sidebarMenuButtonVariants>["variant"]
+  size?: VariantProps<typeof sidebarMenuButtonVariants>["size"]
 }
+
 export type SidebarMenuActionProps = React.ComponentProps<"button"> & {
   asChild?: boolean
   showOnHover?: boolean
 }
+
 export type SidebarMenuBadgeProps = React.ComponentProps<"div">
 export type SidebarMenuSkeletonProps = React.ComponentProps<"div"> & {
   showIcon?: boolean
