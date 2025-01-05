@@ -7,6 +7,7 @@ import Index from "./pages/Index";
 import Dashboard from "./pages/Dashboard";
 import DashboardLayout from "./components/DashboardLayout";
 import CommandList from "./components/CommandList";
+import Announcements from "./pages/Announcements";
 
 const queryClient = new QueryClient();
 
@@ -19,29 +20,17 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route
-            path="/commands"
-            element={
-              <DashboardLayout>
-                <CommandList />
-              </DashboardLayout>
-            }
-          />
+          <Route path="/commands" element={
+            <DashboardLayout>
+              <CommandList />
+            </DashboardLayout>
+          } />
+          <Route path="/announcements" element={<Announcements />} />
           <Route
             path="/roles"
             element={
               <DashboardLayout>
                 <div className="text-white">Roles Management (Coming Soon)</div>
-              </DashboardLayout>
-            }
-          />
-          <Route
-            path="/announcements"
-            element={
-              <DashboardLayout>
-                <div className="text-white">
-                  Announcements System (Coming Soon)
-                </div>
               </DashboardLayout>
             }
           />
