@@ -6,6 +6,7 @@ import DashboardLayout from "./components/DashboardLayout";
 import CommandList from "./components/CommandList";
 import Announcements from "./pages/Announcements";
 import AutoMod from "./pages/AutoMod";
+import RoleManagement from "./components/roles/RoleManagement";
 
 const queryClient = new QueryClient();
 
@@ -30,7 +31,7 @@ function App() {
             path="/roles"
             element={
               <DashboardLayout>
-                <div className="text-white">Roles Management (Coming Soon)</div>
+                <RoleManagement />
               </DashboardLayout>
             }
           />
