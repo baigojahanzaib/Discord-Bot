@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
+import Dashboard from "./pages/Dashboard";
 import DashboardLayout from "./components/DashboardLayout";
 
 const queryClient = new QueryClient();
@@ -16,14 +17,7 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route
-            path="/dashboard"
-            element={
-              <DashboardLayout>
-                <div className="text-white">Dashboard Content (Coming Soon)</div>
-              </DashboardLayout>
-            }
-          />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route
             path="/roles"
             element={
