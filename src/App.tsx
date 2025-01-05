@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Dashboard from "./pages/Dashboard";
 import DashboardLayout from "./components/DashboardLayout";
+import CommandList from "./components/CommandList";
 
 const queryClient = new QueryClient();
 
@@ -18,6 +19,14 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route
+            path="/commands"
+            element={
+              <DashboardLayout>
+                <CommandList />
+              </DashboardLayout>
+            }
+          />
           <Route
             path="/roles"
             element={

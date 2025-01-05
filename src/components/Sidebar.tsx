@@ -8,13 +8,15 @@ import {
   MessageSquare,
   Gift,
   Shield,
+  Terminal,
 } from "lucide-react";
 
 const Sidebar = () => {
   const location = useLocation();
 
   const navigation = [
-    { name: "Dashboard", href: "/", icon: LayoutDashboard },
+    { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
+    { name: "Commands", href: "/commands", icon: Terminal },
     { name: "Roles", href: "/roles", icon: Users },
     { name: "Announcements", href: "/announcements", icon: Bell },
     { name: "Tickets", href: "/tickets", icon: MessageSquare },
