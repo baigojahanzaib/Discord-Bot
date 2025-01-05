@@ -9,7 +9,105 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      bot_commands: {
+        Row: {
+          created_at: string | null
+          description: string | null
+          enabled: boolean | null
+          id: string
+          name: string
+        }
+        Insert: {
+          created_at?: string | null
+          description?: string | null
+          enabled?: boolean | null
+          id?: string
+          name: string
+        }
+        Update: {
+          created_at?: string | null
+          description?: string | null
+          enabled?: boolean | null
+          id?: string
+          name?: string
+        }
+        Relationships: []
+      }
+      command_logs: {
+        Row: {
+          command_id: string | null
+          error_message: string | null
+          executed_at: string | null
+          id: string
+          server_id: string | null
+          success: boolean | null
+          user_id: string
+          username: string
+        }
+        Insert: {
+          command_id?: string | null
+          error_message?: string | null
+          executed_at?: string | null
+          id?: string
+          server_id?: string | null
+          success?: boolean | null
+          user_id: string
+          username: string
+        }
+        Update: {
+          command_id?: string | null
+          error_message?: string | null
+          executed_at?: string | null
+          id?: string
+          server_id?: string | null
+          success?: boolean | null
+          user_id?: string
+          username?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "command_logs_command_id_fkey"
+            columns: ["command_id"]
+            isOneToOne: false
+            referencedRelation: "bot_commands"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "command_logs_server_id_fkey"
+            columns: ["server_id"]
+            isOneToOne: false
+            referencedRelation: "discord_servers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      discord_servers: {
+        Row: {
+          id: string
+          is_active: boolean | null
+          joined_at: string | null
+          prefix: string
+          server_id: string
+          server_name: string
+        }
+        Insert: {
+          id?: string
+          is_active?: boolean | null
+          joined_at?: string | null
+          prefix?: string
+          server_id: string
+          server_name: string
+        }
+        Update: {
+          id?: string
+          is_active?: boolean | null
+          joined_at?: string | null
+          prefix?: string
+          server_id?: string
+          server_name?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
