@@ -1,8 +1,35 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Bot, Shield, Users, Zap } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Auth } from "@supabase/auth-ui-react";
+import { ThemeSupa } from "@supabase/auth-ui-shared";
+import { supabase } from "@/integrations/supabase/client";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Index = () => {
+  const navigate = useNavigate();
+  const [session, setSession] = useState(null);
+
+  useEffect(() => {
+    // Check current session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
+
+    // Listen for auth changes
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+      if (session) {
+        navigate("/dashboard");
+      }
+    });
+
+    return () => subscription.unsubscribe();
+  }, [navigate]);
+
   const features = [
     {
       icon: Shield,
@@ -34,14 +61,36 @@ const Index = () => {
         <p className="mb-8 text-lg text-gray-300 md:text-xl">
           The most powerful Discord bot for your server management needs
         </p>
-        <div className="flex justify-center gap-4">
-          <Link to="/dashboard">
-            <Button className="bg-discord-blurple hover:bg-discord-blurple/90">
-              Open Dashboard
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-          </Link>
-        </div>
+        
+        {!session ? (
+          <div className="max-w-md mx-auto bg-discord-dark p-6 rounded-lg shadow-lg">
+            <Auth
+              supabaseClient={supabase}
+              appearance={{
+                theme: ThemeSupa,
+                variables: {
+                  default: {
+                    colors: {
+                      brand: '#5865F2',
+                      brandAccent: '#4752C4',
+                    },
+                  },
+                },
+              }}
+              providers={["discord"]}
+              redirectTo={window.location.origin}
+            />
+          </div>
+        ) : (
+          <div className="flex justify-center gap-4">
+            <Link to="/dashboard">
+              <Button className="bg-discord-blurple hover:bg-discord-blurple/90">
+                Open Dashboard
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </Link>
+          </div>
+        )}
       </div>
 
       {/* Features Section */}
