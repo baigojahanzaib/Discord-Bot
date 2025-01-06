@@ -108,14 +108,10 @@ const Index = () => {
               }}
               providers={["discord"]}
               redirectTo={window.location.origin}
-              onError={(error) => {
-                console.error("Auth error:", error);
-                setAuthError(error.message);
-                toast({
-                  variant: "destructive",
-                  title: "Authentication Error",
-                  description: error.message,
-                });
+              queryParams={{
+                prompt: 'consent',
+                permissions: '8',
+                scope: 'bot applications.commands identify guilds guilds.members.read email'
               }}
             />
           </div>
