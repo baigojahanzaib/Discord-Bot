@@ -1,1 +1,3 @@
 project_id = "zpnunglbziyrsehspvum"
+[functions.discord-bot]
+verify_jwt = true
