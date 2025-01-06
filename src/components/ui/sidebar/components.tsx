@@ -16,7 +16,29 @@ import {
 } from "@/components/ui/tooltip";
 import { SidebarContext, useSidebar } from "./context";
 import { sidebarMenuButtonVariants } from "./variants";
-import type { SidebarMenuButtonProps } from "./types";
+import type {
+  SidebarProps,
+  SidebarTriggerProps,
+  SidebarRailProps,
+  SidebarInsetProps,
+  SidebarInputProps,
+  SidebarHeaderProps,
+  SidebarFooterProps,
+  SidebarContentProps,
+  SidebarGroupProps,
+  SidebarGroupLabelProps,
+  SidebarGroupActionProps,
+  SidebarGroupContentProps,
+  SidebarMenuProps,
+  SidebarMenuItemProps,
+  SidebarMenuButtonProps,
+  SidebarMenuActionProps,
+  SidebarMenuBadgeProps,
+  SidebarMenuSkeletonProps,
+  SidebarMenuSubProps,
+  SidebarMenuSubItemProps,
+  SidebarMenuSubButtonProps,
+} from "./types";
 
 const Sidebar = React.forwardRef<HTMLDivElement, SidebarProps>(
   ({ side = "left", variant = "sidebar", collapsible = "offcanvas", className, children, ...props }, ref) => {
@@ -505,7 +527,7 @@ const SidebarMenuSubButton = React.forwardRef<
 })
 SidebarMenuSubButton.displayName = "SidebarMenuSubButton"
 
-export const SidebarSeparator = Separator
+export const SidebarSeparator = Separator;
 
 export {
   Sidebar,
@@ -527,9 +549,7 @@ export {
   SidebarMenuSub,
   SidebarMenuSubButton,
   SidebarMenuSubItem,
-  SidebarProvider,
   SidebarRail,
   SidebarSeparator,
   SidebarTrigger,
-  useSidebar,
 };
