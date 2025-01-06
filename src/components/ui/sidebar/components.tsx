@@ -1,43 +1,22 @@
-import * as React from "react"
-import { Slot } from "@radix-ui/react-slot"
-import { PanelLeft } from "lucide-react"
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Separator } from "@/components/ui/separator"
-import { Sheet, SheetContent } from "@/components/ui/sheet"
-import { Skeleton } from "@/components/ui/skeleton"
+import * as React from "react";
+import { Slot } from "@radix-ui/react-slot";
+import { PanelLeft } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Separator } from "@/components/ui/separator";
+import { Sheet, SheetContent } from "@/components/ui/sheet";
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/tooltip"
-import { useSidebar } from "./context"
-import { sidebarMenuButtonVariants } from "./variants"
-import type {
-  SidebarProps,
-  SidebarTriggerProps,
-  SidebarRailProps,
-  SidebarInsetProps,
-  SidebarInputProps,
-  SidebarHeaderProps,
-  SidebarFooterProps,
-  SidebarContentProps,
-  SidebarGroupProps,
-  SidebarGroupLabelProps,
-  SidebarGroupActionProps,
-  SidebarGroupContentProps,
-  SidebarMenuProps,
-  SidebarMenuItemProps,
-  SidebarMenuButtonProps,
-  SidebarMenuActionProps,
-  SidebarMenuBadgeProps,
-  SidebarMenuSkeletonProps,
-  SidebarMenuSubProps,
-  SidebarMenuSubItemProps,
-  SidebarMenuSubButtonProps,
-} from "./types"
+} from "@/components/ui/tooltip";
+import { SidebarContext, useSidebar } from "./context";
+import { sidebarMenuButtonVariants } from "./variants";
+import type { SidebarMenuButtonProps } from "./types";
 
 const Sidebar = React.forwardRef<HTMLDivElement, SidebarProps>(
   ({ side = "left", variant = "sidebar", collapsible = "offcanvas", className, children, ...props }, ref) => {
@@ -548,6 +527,9 @@ export {
   SidebarMenuSub,
   SidebarMenuSubButton,
   SidebarMenuSubItem,
+  SidebarProvider,
   SidebarRail,
+  SidebarSeparator,
   SidebarTrigger,
-}
+  useSidebar,
+};
