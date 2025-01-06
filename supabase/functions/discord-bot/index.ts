@@ -62,8 +62,23 @@ serve(async (req) => {
                   username: message.author.username,
                 })
 
-              // Send response based on command
-              await message.reply(`Executing command: ${command.name}`)
+              // Handle specific commands
+              switch (command.name) {
+                case 'ping':
+                  await message.reply('Pong! 🏓')
+                  break
+                case 'help':
+                  const helpText = commands
+                    .map(cmd => `**!${cmd.name}**: ${cmd.description}`)
+                    .join('\n')
+                  await message.reply(`Available commands:\n${helpText}`)
+                  break
+                case 'info':
+                  await message.reply(`Server: ${message.guild?.name}\nMembers: ${message.guild?.memberCount}`)
+                  break
+                default:
+                  await message.reply(`Executing command: ${command.name}`)
+              }
               break
             }
           }
@@ -82,6 +97,7 @@ serve(async (req) => {
       }
     )
   } catch (error) {
+    console.error('Error:', error)
     return new Response(
       JSON.stringify({ error: error.message }),
       {
