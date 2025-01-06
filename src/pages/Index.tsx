@@ -6,14 +6,26 @@ import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { supabase } from "@/integrations/supabase/client";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useToast } from "@/hooks/use-toast";
 
 const Index = () => {
   const navigate = useNavigate();
   const [session, setSession] = useState(null);
+  const [authError, setAuthError] = useState(null);
+  const { toast } = useToast();
 
   useEffect(() => {
     // Check current session
-    supabase.auth.getSession().then(({ data: { session } }) => {
+    supabase.auth.getSession().then(({ data: { session }, error }) => {
+      if (error) {
+        console.error("Session error:", error);
+        setAuthError(error.message);
+        toast({
+          variant: "destructive",
+          title: "Authentication Error",
+          description: error.message,
+        });
+      }
       setSession(session);
     });
 
@@ -27,8 +39,20 @@ const Index = () => {
       }
     });
 
+    // Check for error in URL
+    const params = new URLSearchParams(window.location.search);
+    const errorDescription = params.get("error_description");
+    if (errorDescription) {
+      setAuthError(errorDescription);
+      toast({
+        variant: "destructive",
+        title: "Authentication Error",
+        description: errorDescription,
+      });
+    }
+
     return () => subscription.unsubscribe();
-  }, [navigate]);
+  }, [navigate, toast]);
 
   const features = [
     {
@@ -64,6 +88,11 @@ const Index = () => {
         
         {!session ? (
           <div className="max-w-md mx-auto bg-discord-dark p-6 rounded-lg shadow-lg">
+            {authError && (
+              <div className="mb-4 p-4 bg-red-500/10 border border-red-500 rounded text-red-500">
+                {authError}
+              </div>
+            )}
             <Auth
               supabaseClient={supabase}
               appearance={{
@@ -79,11 +108,14 @@ const Index = () => {
               }}
               providers={["discord"]}
               redirectTo={window.location.origin}
-              queryParams={{
-                client_id: '1325623903518982235',
-                prompt: 'consent',
-                permissions: '8',
-                scope: 'bot applications.commands identify guilds guilds.members.read email'
+              onError={(error) => {
+                console.error("Auth error:", error);
+                setAuthError(error.message);
+                toast({
+                  variant: "destructive",
+                  title: "Authentication Error",
+                  description: error.message,
+                });
               }}
             />
           </div>
