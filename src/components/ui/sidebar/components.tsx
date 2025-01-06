@@ -527,8 +527,6 @@ const SidebarMenuSubButton = React.forwardRef<
 })
 SidebarMenuSubButton.displayName = "SidebarMenuSubButton"
 
-export const SidebarSeparator = Separator;
-
 export {
   Sidebar,
   SidebarContent,
@@ -550,6 +548,6 @@ export {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
   SidebarRail,
-  SidebarSeparator,
+  Separator as SidebarSeparator,
   SidebarTrigger,
 };
