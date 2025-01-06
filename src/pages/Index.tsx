@@ -79,6 +79,10 @@ const Index = () => {
               }}
               providers={["discord"]}
               redirectTo={window.location.origin}
+              queryParams={{
+                client_id: '1325623903518982235',
+                prompt: 'consent',
+              }}
               providerScopes={{
                 discord: 'bot applications.commands identify guilds guilds.members.read email'
               }}
