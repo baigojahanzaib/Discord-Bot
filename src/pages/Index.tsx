@@ -79,6 +79,9 @@ const Index = () => {
               }}
               providers={["discord"]}
               redirectTo={window.location.origin}
+              providerScopes={{
+                discord: 'bot applications.commands identify guilds guilds.members.read email'
+              }}
             />
           </div>
         ) : (
